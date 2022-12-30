@@ -1,1 +1,1 @@
-This is a My site using [Next.js] (https://manstar03.github.io).
+This is a My site using [Next.js](https://manstar03.github.io).
