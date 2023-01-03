@@ -1,19 +1,25 @@
 import Head from 'next/head'
-import Layout, { siteTitle } from '../components/layout'
+import Image from 'next/image'
+import Layout, { slide } from '../components/layout'
 import utilStyles from '../styles/utils.module.css'
 import { getSortedPostsData } from '../lib/posts'
 import Link from "next/link"
 import Date from '../components/date'
+import Carousel from '../components/carousel'
+import NeedSomething from '../components/needSomething'
+import NewProducts from '../components/newProducts'
+import TopDev from '../components/topDev'
 
 export default function Home({ allPostsData }) {
   return (
     <Layout home>
-      <Head>
-        <title>{siteTitle}</title>
-      </Head>
-      <section className={utilStyles.headingMd}>
+      <Carousel slide={slide}></Carousel>
+      <NeedSomething />
+      <NewProducts />
+      <TopDev />
+      {/* <div className={utilStyles.topDev}>
         <p>Hi Every one. I am Aadil Achha. I am a Full Stack developer. You can find me from this address. https://linkdin.com/manstar03/</p>
-      </section>
+      </div>
       <section className={`${utilStyles.headingMd} ${utilStyles.padding1px}`}>
         <h2 className={utilStyles.headingLg}>Blog</h2>
         <ul className={utilStyles.list}>
@@ -28,7 +34,7 @@ export default function Home({ allPostsData }) {
             </li>
           ))}
         </ul>
-      </section>
+      </section> */}
     </Layout>
   )
 }

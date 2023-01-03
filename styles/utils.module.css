@@ -50,3 +50,21 @@
 .lightText {
   color: #666;
 }
+.fullSize{
+  width:100%;
+  height:100vh;
+}
+.topDev{
+  width:100%;
+  height:10vh;
+}
+.needSomething{
+  width:100%;
+  padding-left:2%;
+  padding-right:2%;
+  font-family: Roboto,Helvetica Neue,Helvetica,Arial,sans-serif;
+}
+.divider{
+  height:5vh;
+  border-bottom: 1px solid #dedede;
+}
