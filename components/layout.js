@@ -3,6 +3,9 @@ import Image from 'next/image'
 import styles from './layout.module.css'
 import utilStyles from '../styles/utils.module.css'
 import Link from 'next/link'
+import { useEffect } from 'react'
+import Navbar from './navbar'
+import Router from 'next/router'
 
 const name = 'Aadil Achha';
 export const siteTitle = 'Online Jobs'
@@ -23,11 +26,13 @@ export const slide = {
   ]
 }
 
-export default function Layout({ children, home }) {
+export default function Layout(props) {
+  useEffect(()=>{
+    props.updateNavbar
+  })
   return (
     <div className={styles.container}>
       <Head>
-        <title>{siteTitle}</title>
         <link rel="icon" href="/favicon.ico" />
         <meta
           name="description"
@@ -82,55 +87,17 @@ export default function Layout({ children, home }) {
               </form>
               <ul className = "navbar-nav me-auto mb-2 md-md-0">
                 <li className = "nav-item">
-                  <Link className = "nav-link" href = "/login">Login</Link>
+                  <Link className = "nav-link" href = "/auth/login">Login</Link>
                 </li>
                 <li className = "nav-item">
-                  <Link className = "nav-link" href = "/register">Sign Up</Link>
+                  <Link className = "nav-link" href = "/auth/register">Sign Up</Link>
                 </li>
               </ul>
             </div>
           </div>
         </nav>
       </header>
-      {/* <content className={styles.content}>
-        {home ? (
-          <>
-            <Image
-              priority
-              src="/images/profile.jpg"
-              className={utilStyles.borderCircle}
-              height={144}
-              width={144}
-              alt={name}
-            />
-            <h1 className={utilStyles.heading2Xl}>{name}</h1>
-          </>
-        ) : (
-          <>
-            <Link href="/">
-              <Image
-                priority
-                src="/images/profile.jpg"
-                className={utilStyles.borderCircle}
-                height={108}
-                width={108}
-                alt={name}
-              />
-            </Link>
-            <h2 className={utilStyles.headingLg}>
-              <Link href="/" className={utilStyles.colorInherit}>
-                {name}
-              </Link>
-            </h2>
-          </>
-        )}
-      </content> */}
-      <main>{children}</main>
-      {!home && (
-        <div className={styles.backToHome}>
-          <Link href="/">← Back to home</Link>
-        </div>
-      )}
+      <main>{props.children}</main>
     </div>
   )
 }

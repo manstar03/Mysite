@@ -9,11 +9,11 @@ export default function Carousel({slide}){
                 slide.h1.map((str,idx)=>{
                     if (idx == 0){
                         return (
-                            <button type = "button" data-bs-target="#myCarousel" data-bs-slide-to={idx} className = "active" aira-current = "true" aria-label={`Slide ${idx+1}`}></button>
+                            <button type = "button" key={"button"+idx} data-bs-target="#myCarousel" data-bs-slide-to={idx} className = "active" aira-current = "true" aria-label={`Slide ${idx+1}`}></button>
                         );
                     } else {
                         return (
-                            <button type = "button" data-bs-target="#myCarousel" data-bs-slide-to={idx} aria-label={`Slide ${idx+1}`}></button>
+                            <button type = "button" key={"button"+idx} data-bs-target="#myCarousel" data-bs-slide-to={idx} aria-label={`Slide ${idx+1}`}></button>
                         );
                     }
                 })
@@ -21,23 +21,48 @@ export default function Carousel({slide}){
             </div>
             <div className="carousel-inner">
             {
-                slide.h1.map((str,idx)=>(
-                    <div className={`carousel-item ${idx==0?"active":""}`}>
-                        <Image
-                        src={`/slider/${idx+1}.jpg`}
-                        className={utilStyles.fullSize}
-                        width = "100"
-                        height = "80"
-                        alt = "image"
-                        />
-                        <div className="container">
-                        <div className="carousel-caption text-start">
-                            <h1>{str}</h1>
-                            <p>{slide.p[idx]}</p>
-                        </div>
-                        </div>
-                    </div>
-                ))
+                slide.h1.map((str,idx)=>{
+                    if (idx == 0){
+                        return(
+                            <div className={"carousel-item active"} key = {idx}>
+                                <Image
+                                    priority
+                                    src={`/slider/${idx+1}.jpg`}
+                                    className={utilStyles.fullSize}
+                                    width = "100"
+                                    height = "100"
+                                    alt = "image"
+                                />
+                                <div className="container">
+                                    <div className="carousel-caption text-start">
+                                        <h1>{str}</h1>
+                                        <p>{slide.p[idx]}</p>
+                                    </div>
+                                </div>
+                            </div>
+                        );
+                    } else {
+                        return(
+                            <div className={"carousel-item"} key = {idx}>
+                                <Image
+                                    priority
+                                    src={`/slider/${idx+1}.jpg`}
+                                    className={utilStyles.fullSize}
+                                    width = "100"
+                                    height = "100"
+                                    alt = "image"
+                                />
+                                <div className="container">
+                                    <div className="carousel-caption text-start">
+                                        <h1>{str}</h1>
+                                        <p>{slide.p[idx]}</p>
+                                    </div>
+                                </div>
+                            </div>
+                        );
+                    }
+                    
+                })
             }
             </div>
             <button className="carousel-control-prev" type="button" data-bs-target="#myCarousel" data-bs-slide="prev">

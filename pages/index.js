@@ -1,22 +1,24 @@
-import Head from 'next/head'
-import Image from 'next/image'
 import Layout, { slide } from '../components/layout'
-import utilStyles from '../styles/utils.module.css'
+import { siteTitle } from '../components/layout';
+import Head from "next/head";
 import { getSortedPostsData } from '../lib/posts'
-import Link from "next/link"
-import Date from '../components/date'
 import Carousel from '../components/carousel'
 import NeedSomething from '../components/needSomething'
 import NewProducts from '../components/newProducts'
 import TopDev from '../components/topDev'
 
-export default function Home({ allPostsData }) {
+export default function Home({ newProducts,topDevelopers }) {
   return (
     <Layout home>
+      <Head>
+          <title>
+              {siteTitle}
+          </title>
+      </Head>
       <Carousel slide={slide}></Carousel>
       <NeedSomething />
-      <NewProducts />
-      <TopDev />
+      <NewProducts newProducts = {newProducts} />
+      <TopDev topDev = {topDevelopers} />
       {/* <div className={utilStyles.topDev}>
         <p>Hi Every one. I am Aadil Achha. I am a Full Stack developer. You can find me from this address. https://linkdin.com/manstar03/</p>
       </div>
@@ -40,10 +42,34 @@ export default function Home({ allPostsData }) {
 }
 
 export async function getStaticProps() {
-  const allPostsData = getSortedPostsData()
+  const newProducts = getSortedPostsData();
+  return {
+    props:{
+      "id":123
+    }
+  }
+  console.log(newProducts);
+  // const topDevelopers = getTopDevelopers();
+  const topDevelopers = [];
   return {
     props: {
-      allPostsData
+      newProducts,
+      topDevelopers,
     }
   }
 }
+
+// export async function getServerSideProps(context){
+//   let res = await fetch("http://localhost:3000/api/posts",{
+//     method: "GET",
+//     headers:{
+//       "Content-Type":"application/json",
+//     }
+//   });
+//   const allPostsData = await res.json();
+//   return {
+//     props:{
+//       allPostsData
+//     }
+//   };
+// }
